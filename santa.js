@@ -1,7 +1,20 @@
 window.onload = function()
 {
-	drawList();
-};
+    checkStorage()
+}
+
+const pageStorage = localStorage.getItem("mode")
+
+
+// check storage if button disabled or not
+function checkStorage() {
+    if (pageStorage == "complete") {
+        drawList();
+      } else {
+        completedTheme(); //if completed mode was on, run this function
+      }
+    }
+
 
 var give = ['Daniel', 'Elijah', 'Jon', 'Katy', 'Joss', 'Rocher'];
 var receive = give.concat();
@@ -22,8 +35,8 @@ function drawList()
 	}
 }
 
-function selectPerson(person) 
-{
+function selectPerson(person) {
+
 	var name = give[person];
 	var nameIndex = receive.indexOf(name);
 	
@@ -55,16 +68,27 @@ choose.onclick = function()
 	{
 		selectPerson(people.value);
 	}
-};
+}
 
-close.onclick = function()
-{
+close.onclick = function() {
+
 	result.innerHTML = "";
 	close.innerHTML = "";
-  if(give.length == 0){
- peopleWrap.parentNode.removeChild(peopleWrap);
-		choose.parentNode.removeChild(choose);
-		result.innerHTML = "<h2>All done!</h2>";
-		close.innerHTML = "";
-	}
+    result.innerHTML = "<h2>All done!</h2>";
+    completedTheme ();
+}
+
+function completedTheme() { 
+    console.log("completedTheme active");
+    document.getElementById("choose").disabled=true;
 };
+
+//   if(give.length == 0){
+//  peopleWrap.parentNode.removeChild(peopleWrap);
+// 		choose.parentNode.removeChild(choose);
+// 		result.innerHTML = "<h2>All done!</h2>";
+// 		close.innerHTML = "";
+// 	}
+// }
+
+
